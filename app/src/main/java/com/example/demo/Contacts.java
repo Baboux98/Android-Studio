@@ -25,11 +25,11 @@ public class Contacts extends AppCompatActivity {
 
         List<User> UserList = new ArrayList<>();
         ListView listView = (ListView) findViewById(R.id.listUser) ;
-        UserList.add(new User("GNACADJA", "Lucas", 25,"Masculin","96346856"));
-        UserList.add(new User("ADELEKE", "Kismath", 21,"Féminin","96192019"));
-        UserList.add(new User("TOLOGNON", "Robert", 20,"Masculin","61720976"));
-        UserList.add(new User("ASSOGBA", "Danielle", 19,"Féminin","67712006"));
-        UserList.add(new User("AKPLOGAN", "Michelle", 32,"Féminin","67712006"));
+        UserList.add(new User("Lucas","96346856"));
+        UserList.add(new User("Kismath", "96192019"));
+        UserList.add(new User("Farhane", "61720976"));
+        UserList.add(new User("Ipopo", "67712006"));
+        UserList.add(new User("Enock", "67712006"));
 
 
 
@@ -40,11 +40,8 @@ public class Contacts extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 User item = (User) parent.getItemAtPosition(position);
                 Intent intent = new Intent(Contacts.this, Details.class);
-                intent.putExtra("user_first_name", item.getFirst_name());
-                intent.putExtra("user_last_name", item.getLast_name());
+                intent.putExtra("user_name", item.getname());
                 intent.putExtra("user_phone", item.getPhone());
-                intent.putExtra("user_sexe", item.getSexe());
-
                 startActivity(intent);
             }
         });

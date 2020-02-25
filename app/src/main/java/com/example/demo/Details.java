@@ -1,8 +1,15 @@
 package com.example.demo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class Details extends AppCompatActivity {
@@ -12,22 +19,32 @@ public class Details extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_details);
             Bundle bundle = getIntent().getExtras();
-            this.setTitle("Détails de l'utilisateur");
+            this.setTitle("Détails ");
             if (bundle != null) {
-                TextView fn = (TextView) findViewById(R.id.txt_user_fn);
-                TextView ln = (TextView) findViewById(R.id.user_ln);
-                TextView tel = (TextView) findViewById(R.id.user_phone);
-                TextView ugender = (TextView) findViewById(R.id.user_gender);
+                TextView name = (TextView) findViewById(R.id.txt_user_name);
+                TextView telephone = (TextView) findViewById(R.id.user_phone);
 
-                String first_name = bundle.getString("user_first_name");
-                String last_name = bundle.getString("user_last_name");
-                String gender = bundle.getString("user_sexe");
-                String phone = bundle.getString("user_phone");
 
-                fn.setText(first_name);
-                ln.setText(last_name);
-                tel.setText(phone);
-                ugender.setText(gender);
+                String first_name = bundle.getString("user_name");
+                final String phone = bundle.getString("user_phone");
+
+                name.setText(first_name);
+                telephone.setText(phone);
+                Button Call = (Button) findViewById(R.id.Make_a_call);
+
+                Call.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View arg0) {
+                        Intent callIntent = new Intent(Intent.ACTION_CALL);
+                        callIntent.setData(Uri.parse(phone));
+
+                        if (ActivityCompat.checkSelfPermission(Details.this,
+                                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                            return;
+                        }
+                        startActivity(callIntent);
+                    }
+                });
+
             }
 
         }

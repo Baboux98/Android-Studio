@@ -46,15 +46,10 @@ public class Adapter extends BaseAdapter {
        convertView = inflater.inflate(R.layout.adapter_layout, null);
 
         User current_user = getItem(position);
-        String first_name = current_user.getFirst_name();
-        String last_name = current_user.getLast_name();
+        String name = current_user.getname();
 
-        TextView first_name_view = convertView.findViewById(R.id.txt_first_name);
-        TextView last_name_view = convertView.findViewById(R.id.txt_last_name);
-
-        first_name_view.setText(first_name);
-        last_name_view.setText(last_name);
-
+        TextView name_view = convertView.findViewById(R.id.txt_name);
+        name_view.setText(name);
 
         return  convertView;
     }
