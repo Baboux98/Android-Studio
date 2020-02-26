@@ -14,39 +14,39 @@ import android.widget.TextView;
 
 public class Details extends AppCompatActivity {
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_details);
-            Bundle bundle = getIntent().getExtras();
-            this.setTitle("Détails ");
-            if (bundle != null) {
-                TextView name = (TextView) findViewById(R.id.txt_user_name);
-                TextView telephone = (TextView) findViewById(R.id.user_phone);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_details);
+        Bundle bundle = getIntent().getExtras();
+        this.setTitle("Détails ");
+        if (bundle != null) {
+            TextView name = (TextView) findViewById(R.id.txt_user_name);
+            TextView telephone = (TextView) findViewById(R.id.user_phone);
 
 
-                String first_name = bundle.getString("user_name");
-                final String phone = bundle.getString("user_phone");
+            String first_name = bundle.getString("user_name");
+            final String phone = bundle.getString("user_phone");
 
-                name.setText(first_name);
-                telephone.setText(phone);
-                Button Call = (Button) findViewById(R.id.Make_a_call);
+            name.setText(first_name);
+            telephone.setText(phone);
+            Button Call = (Button) findViewById(R.id.Make_a_call);
 
-                Call.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View arg0) {
-                        Intent callIntent = new Intent(Intent.ACTION_CALL);
-                        callIntent.setData(Uri.parse(phone));
+            Call.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View arg0) {
+                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    String appel = "tel:" + phone;
+                    callIntent.setData(Uri.parse(appel));
 
-                        if (ActivityCompat.checkSelfPermission(Details.this,
-                                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                            return;
-                        }
-                        startActivity(callIntent);
+                    if (ActivityCompat.checkSelfPermission(Details.this,
+                            Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        return;
                     }
-                });
-
-            }
+                    startActivity(callIntent);
+                }
+            });
 
         }
-}
 
+    }
+}
